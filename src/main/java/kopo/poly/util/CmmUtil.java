@@ -1,7 +1,5 @@
 package kopo.poly.util;
 
-import com.oracle.wls.shaded.org.apache.xpath.operations.String;
-
 public class CmmUtil {
 	public static String nvl(String str, String chg_str) {
 		String res;

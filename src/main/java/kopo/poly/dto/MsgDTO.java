@@ -1,7 +1,6 @@
 package kopo.poly.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.oracle.wls.shaded.org.apache.xpath.operations.String;
 import lombok.Getter;
 import lombok.Setter;
 
