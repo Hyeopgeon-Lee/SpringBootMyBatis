@@ -109,7 +109,6 @@ public class NoticeController {
         log.info("{}.noticeInsert Start!", this.getClass().getName());
 
         String msg = ""; // 메시지 내용
-
         MsgDTO dto; // 결과 메시지 구조
 
         try {
