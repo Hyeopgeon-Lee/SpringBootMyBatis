@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
-<mapper namespace="kopo.poly.persistance.mapper.IUserInfoMapper">
+<mapper namespace="kopo.poly.mapper.IUserInfoMapper">
 
     <!-- 회원 가입 전 아이디 중복체크하기 -->
     <select id="getUserIdExists" parameterType="UserInfoDTO" resultType="UserInfoDTO">
-        SELECT DECODE(COUNT(1), 0, 'N', 'Y') AS EXISTS_YN
+        SELECT
+            IF(COUNT(USER_ID) > 0, 'Y', 'N') AS EXISTS_YN
         FROM USER_INFO
         WHERE USER_ID = #{userId}
     </select>
 
     <!-- 회원 가입 전 이메일 중복체크하기 -->
     <select id="getEmailExists" parameterType="UserInfoDTO" resultType="UserInfoDTO">
-        SELECT DECODE(COUNT(1), 0, 'N', 'Y') AS EXISTS_YN
+        SELECT
+            IF(COUNT(USER_ID) > 0, 'Y', 'N') AS EXISTS_YN
         FROM USER_INFO
         WHERE EMAIL = #{email}
     </select>
@@ -37,9 +39,9 @@
                 #{addr1},
                 #{addr2},
                 #{userId},
-                SYSDATE,
+                NOW(),
                 #{userId},
-                SYSDATE)
+                NOW())
     </insert>
 
     <!-- 로그인을 위해 아이디와 비밀번호가 일치하는지 확인하기 -->

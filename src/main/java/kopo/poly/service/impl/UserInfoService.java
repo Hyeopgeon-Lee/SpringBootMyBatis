@@ -29,6 +29,7 @@ public class UserInfoService implements IUserInfoService {
 
         log.info("{}.getUserIdExists Start!", this.getClass().getName());
 
+        // DB 이메일이 존재하는지 SQL 쿼리 실행
         UserInfoDTO rDTO = userInfoMapper.getUserIdExists(pDTO);
 
         log.info("{}.getUserIdExists End!", this.getClass().getName());
@@ -42,14 +43,12 @@ public class UserInfoService implements IUserInfoService {
         log.info("{}.emailAuth Start!", this.getClass().getName());
 
         // DB 이메일이 존재하는지 SQL 쿼리 실행
-        // SQL 쿼리에 COUNT()를 사용하기 때문에 반드시 조회 결과는 존재함
-        UserInfoDTO rDTO = userInfoMapper.getEmailExists(pDTO);
-
-        String existsYn = CmmUtil.nvl(rDTO.getExistsYn());
+        UserInfoDTO rDTO = Optional.ofNullable(userInfoMapper.getEmailExists(pDTO)).orElseGet(UserInfoDTO::new);
 
         log.info("rDTO : {}", rDTO);
 
-        if (existsYn.equals("N")) {
+        // 이메일 주소가 중복되지 않는다면.. 메일 발송
+        if (CmmUtil.nvl(rDTO.getExistsYn()).equals("N")) {
 
             // 6자리 랜덤 숫자 생성하기
             int authNumber = ThreadLocalRandom.current().nextInt(100000, 1000000);

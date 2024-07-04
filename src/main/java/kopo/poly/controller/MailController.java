@@ -29,7 +29,7 @@ public class MailController {
     public String mailForm() {
 
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
-        log.info("{}mailForm Start!", this.getClass().getName());
+        log.info("{}.mailForm Start!", this.getClass().getName());
 
         return "mail/mailForm";
     }
@@ -41,7 +41,7 @@ public class MailController {
     @PostMapping(value = "sendMail")
     public MsgDTO sendMail(HttpServletRequest request) {
 
-        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)D
         log.info("{}.sendMail Start!", this.getClass().getName());
 
         String msg; // 발송 결과 메시지
