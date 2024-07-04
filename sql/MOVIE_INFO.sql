@@ -5,7 +5,7 @@ create table MOVIE_INFO
     MOVIE_RANK    int                                  null,
     MOVIE_NM      varchar(100)                         null,
     MOVIE_RESERVE varchar(100)                         null,
-    SCORE         int                                  null,
+    SCORE         varchar(16)                          null,
     OPEN_DAY      varchar(16)                          null,
     REG_ID        varchar(16)                          null,
     REG_DT        datetime default current_timestamp() null,
@@ -14,3 +14,4 @@ create table MOVIE_INFO
     primary key (COLLECT_TIME, SEQ)
 )
     comment 'CGV 정보';
+

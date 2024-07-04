@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 public class FoodService implements IFoodService {
 
-    @Scheduled(cron = "* * 3 * * *")
     @Override
     public List<FoodDTO> toDayFood() throws Exception {
 
@@ -40,7 +39,7 @@ public class FoodService implements IFoodService {
         Elements element = doc.select("table.tbl_table tbody");
 
         // Iterator을 사용하여 영화 순위 정보를 가져오기
-        Iterator<Element> foodIt = element.select("tr").iterator(); //영화 순위
+        Iterator<Element> foodIt = element.select("tr").iterator(); // 요일별 학식 메뉴
 
         FoodDTO pDTO;
 
@@ -91,4 +90,21 @@ public class FoodService implements IFoodService {
         return pList;
     }
 
+    @Scheduled(cron = "* * 3 * * *")
+    @Override
+    public void toDayFoodBatch() throws Exception {
+
+        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info("{}.toDayFoodBatch Start!", this.getClass().getName());
+
+        List<FoodDTO> rList = this.toDayFood();
+
+        rList.forEach(dto -> {
+            log.info("{} FOOD : ", dto);
+        });
+
+        // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
+        log.info("{}.toDayFoodBatch End!", this.getClass().getName());
+
+    }
 }
