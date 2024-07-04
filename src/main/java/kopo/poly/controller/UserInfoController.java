@@ -204,9 +204,9 @@ public class UserInfoController {
      */
     @GetMapping(value = "login")
     public String login() {
-        log.info("{}.user/login Start!", this.getClass().getName());
+        log.info("{}.login Start!", this.getClass().getName());
 
-        log.info("{}.user/login End!", this.getClass().getName());
+        log.info("{}.login End!", this.getClass().getName());
 
         return "user/login";
     }
@@ -240,7 +240,7 @@ public class UserInfoController {
 
             pDTO.setUserId(userId);
 
-            //비밀번호는 절대로 복호화되지 않도록 해시 알고리즘으로 암호화함
+            //비밀번호는 절대로 복호화되지 않도록 해시 알고리즘으로 암호화함`
             pDTO.setPassword(EncryptUtil.encHashSHA256(password));
 
             // 로그인을 위해 아이디와 비밀번호가 일치하는지 확인하기 위한 userInfoService 호출하기
@@ -327,7 +327,7 @@ public class UserInfoController {
      */
     @PostMapping(value = "searchUserIdProc")
     public String searchUserIdProc(HttpServletRequest request, ModelMap model) throws Exception {
-        log.info("{}.user/searchUserIdProc Start!", this.getClass().getName());
+        log.info("{}.searchUserIdProc Start!", this.getClass().getName());
 
         /*
          * ########################################################################
@@ -365,7 +365,7 @@ public class UserInfoController {
 
         model.addAttribute("rDTO", rDTO);
 
-        log.info("{}.user/searchUserIdProc End!", this.getClass().getName());
+        log.info("{}.searchUserIdProc End!", this.getClass().getName());
 
         return "user/searchUserIdResult";
 
@@ -377,14 +377,14 @@ public class UserInfoController {
      */
     @GetMapping(value = "searchPassword")
     public String searchPassword(HttpSession session) {
-        log.info("{}.user/searchPassword Start!", this.getClass().getName());
+        log.info("{}.searchPassword Start!", this.getClass().getName());
 
         // 강제 URL 입력 등 오는 경우가 있어 세션 삭제
         // 비밀번호 재생성하는 화면은 보안을 위해 생성한 NEW_PASSWORD 세션 삭제
         session.setAttribute("NEW_PASSWORD", "");
         session.removeAttribute("NEW_PASSWORD");
 
-        log.info("{}.user/searchPassword End!", this.getClass().getName());
+        log.info("{}.searchPassword End!", this.getClass().getName());
 
         return "user/searchPassword";
 
@@ -397,7 +397,7 @@ public class UserInfoController {
      */
     @PostMapping(value = "searchPasswordProc")
     public String searchPasswordProc(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
-        log.info("{}.user/searchPasswordProc Start!", this.getClass().getName());
+        log.info("{}.searchPasswordProc Start!", this.getClass().getName());
 
         /*
          * ########################################################################
@@ -441,7 +441,7 @@ public class UserInfoController {
         // userId 값을 넣은 이유는 비밀번호 재설정하는 newPasswordProc 함수에서 사용하기 위함
         session.setAttribute("NEW_PASSWORD", userId);
 
-        log.info("{}.user/searchPasswordProc End!", this.getClass().getName());
+        log.info("{}.searchPasswordProc End!", this.getClass().getName());
 
         return "user/newPassword";
 
