@@ -4,9 +4,9 @@
 <%
     UserInfoDTO rDTO = (UserInfoDTO) request.getAttribute("rDTO");
 
-    String msg = "";
+    String msg;
 
-    if (CmmUtil.nvl(rDTO.getUserId()).length() > 0) { // 아이디 찾기 성공
+    if (!CmmUtil.nvl(rDTO.getUserId()).isEmpty()) { // 아이디 찾기 성공
         msg = CmmUtil.nvl(rDTO.getUserName()) + " 회원님의 " + CmmUtil.nvl(rDTO.getUserId()) + "입니다.";
 
     } else {
@@ -38,19 +38,17 @@
 <h2>아이디 찾기 결과</h2>
 <hr/>
 <br/>
-<form id="f">
-    <div class="divTable minimalistBlack">
-        <div class="divTableBody">
-            <div class="divTableRow">
-                <div class="divTableCell">
-                    <%=msg%>
-                </div>
+<div class="divTable minimalistBlack">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell">
+                <%=msg%>
             </div>
         </div>
     </div>
-    <div>
-        <button id="btnLogin" type="button">로그인</button>
-    </div>
-</form>
+</div>
+<div>
+    <button id="btnLogin" type="button">로그인</button>
+</div>
 </body>
 </html>
